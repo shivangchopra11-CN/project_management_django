@@ -51,6 +51,7 @@ def create_project(request):
 @api_view(['POST'])
 @invalid_data
 def assign_project(request,user_id,proj_id):
+    print(user_id, proj_id)
     user = user_id
     project = Project.objects.get(id=proj_id)
     user_object = User.objects.get(id=user)
