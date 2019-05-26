@@ -44,16 +44,16 @@ paths:
       description: "Assign a project mentor to a project."
       operationId: "assign_mentor"
       parameters:
-      - name: "user_id"
-        in: "path"
+      - in: "path"
+        name: "user_id"
         description: "ID of user"
         required: true
-        type: "integer"
-      - name: "proj_id"
-        in: "path"
+        type: integer
+      - in: "path"
+        name: "proj_id"
         description: "ID of project"
         required: true
-        type: "integer"
+        type: integer
       responses:
         201:
           description: "Mentors assigned successfully"
@@ -63,27 +63,27 @@ paths:
       description: "Assign a project mentor to a project."
       operationId: "assign_project"
       parameters:
-      - name: "user_id"
-        in: "path"
+      - in: "path"
+        name: "user_id"
         description: "ID of user"
         required: true
-        type: "integer"
-      - name: "proj_id"
-        in: "path"
+        type: integer
+      - in: "path"
+        name: "proj_id"
         description: "ID of project"
         required: true
-        type: "integer"
+        type: integer
       responses:
         201:
           description: "Mentors assigned successfully"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
-  /users/{user_id}/mentees/:
+  /mentors/{mentor_id}/mentees/:
     get:
       description: "Get the list of IDs of the users being mentored by the queried\
         \ user."
       operationId: "get_mentees"
       parameters:
-      - name: "user_id"
+      - name: "mentor_id"
         in: "path"
         description: "ID of the user"
         required: true
@@ -92,13 +92,13 @@ paths:
         200:
           description: "Mentees fetched successfully"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
-  /users/{user_id}/projects/:
+  /mentors/{mentor_id}/projects/:
     get:
       description: "Get the list of IDs of the projects being mentored by the queried\
         \ user."
       operationId: "get_mentoring_projects"
       parameters:
-      - name: "user_id"
+      - name: "mentor_id"
         in: "path"
         description: "ID of the user"
         required: true
@@ -107,7 +107,7 @@ paths:
         200:
           description: "Projects fetched successfully"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
-  /project/{project_id}/get-user-mentor/:
+  /project/{project_id}/associates/:
     get:
       description: "Get the list of IDs of the mentors and users of the project"
       operationId: "get_users_and_mentors"

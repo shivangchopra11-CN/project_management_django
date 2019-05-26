@@ -20,10 +20,10 @@ def invalid_data(func):
     return wrapper
 
 
-@invalid_data
 @csrf_exempt
 @require_http_methods(['POST'])
 @api_view(['POST'])
+@invalid_data
 def create_user(request):
     data = json.loads(request.body.decode('utf-8'))
     name = data.get('name')
@@ -32,10 +32,11 @@ def create_user(request):
     return HttpResponse('202 : User added successfully')
 
 
-@invalid_data
+
 @csrf_exempt
 @require_http_methods(['POST'])
 @api_view(['POST'])
+@invalid_data
 def create_project(request):
     data = json.loads(request.body.decode('utf-8'))
     name = data.get('name')
@@ -44,10 +45,11 @@ def create_project(request):
     return HttpResponse('202 : Project created successfully')
 
 
-@invalid_data
+
 @csrf_exempt
 @require_http_methods(['POST'])
 @api_view(['POST'])
+@invalid_data
 def assign_project(request,user_id,proj_id):
     user = user_id
     project = Project.objects.get(id=proj_id)
@@ -57,10 +59,11 @@ def assign_project(request,user_id,proj_id):
     return HttpResponse('202 : Project assigned to user')
 
 
-@invalid_data
+
 @csrf_exempt
 @require_http_methods(['POST'])
 @api_view(['POST'])
+@invalid_data
 def assign_mentor(request,proj_id,user_id):
     user = user_id
     user_object = User.objects.get(id=user)
@@ -71,10 +74,11 @@ def assign_mentor(request,proj_id,user_id):
     return HttpResponse('202 : Mentor assigned to project successfully')
 
 
-@invalid_data
+
 @csrf_exempt
 @require_http_methods(['GET'])
 @api_view(['GET'])
+@invalid_data
 def get_projects(request, user_id):
     user_object = User.objects.get(id=user_id)
     project_users = ProjectUser.objects.filter(user=user_object, is_mentor=True).values_list('project_id', flat=True)
@@ -89,10 +93,11 @@ def get_projects(request, user_id):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
-@invalid_data
+
 @csrf_exempt
 @require_http_methods(['GET'])
 @api_view(['GET'])
+@invalid_data
 def get_mentees(request, user_id):
     """
         get:
@@ -119,10 +124,11 @@ def get_mentees(request, user_id):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
-@invalid_data
+
 @csrf_exempt
 @require_http_methods(['GET'])
 @api_view(['GET'])
+@invalid_data
 def get_user_mentor(request, proj_id):
     print(request, proj_id)
     proj_object = Project.objects.get(id=proj_id)
