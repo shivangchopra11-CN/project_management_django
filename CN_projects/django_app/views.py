@@ -11,6 +11,16 @@ from rest_framework.decorators import api_view
 from .models import User, Project, ProjectUser
 
 
+def invalid_data(func):
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as error:
+            return HttpResponse(error)
+    return wrapper
+
+
+@invalid_data
 @csrf_exempt
 @require_http_methods(['POST'])
 @api_view(['POST'])
@@ -22,6 +32,7 @@ def create_user(request):
     return HttpResponse('202 : User added successfully')
 
 
+@invalid_data
 @csrf_exempt
 @require_http_methods(['POST'])
 @api_view(['POST'])
@@ -33,6 +44,7 @@ def create_project(request):
     return HttpResponse('202 : Project created successfully')
 
 
+@invalid_data
 @csrf_exempt
 @require_http_methods(['POST'])
 @api_view(['POST'])
@@ -45,6 +57,7 @@ def assign_project(request,user_id,proj_id):
     return HttpResponse('202 : Project assigned to user')
 
 
+@invalid_data
 @csrf_exempt
 @require_http_methods(['POST'])
 @api_view(['POST'])
@@ -58,6 +71,7 @@ def assign_mentor(request,proj_id,user_id):
     return HttpResponse('202 : Mentor assigned to project successfully')
 
 
+@invalid_data
 @csrf_exempt
 @require_http_methods(['GET'])
 @api_view(['GET'])
@@ -75,6 +89,7 @@ def get_projects(request, user_id):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
+@invalid_data
 @csrf_exempt
 @require_http_methods(['GET'])
 @api_view(['GET'])
@@ -104,6 +119,7 @@ def get_mentees(request, user_id):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
+@invalid_data
 @csrf_exempt
 @require_http_methods(['GET'])
 @api_view(['GET'])
