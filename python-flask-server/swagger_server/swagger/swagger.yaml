@@ -4,7 +4,7 @@ info:
   description: "API"
   version: "1.0.0"
   title: "Projects - Mentors and Mentees"
-host: "0.0.0.0:8000"
+host: "django-8000.cy.devfactory.com"
 basePath: "/"
 schemes:
 - "http"
